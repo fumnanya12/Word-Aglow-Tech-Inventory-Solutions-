@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_14_171858) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_15_153934) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.integer "author_id"
     t.string "author_type"
@@ -35,5 +35,42 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_14_171858) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.boolean "published"
+    t.string "slug"
+    t.string "title"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_images", force: :cascade do |t|
+    t.string "alt_text"
+    t.datetime "created_at", null: false
+    t.integer "position"
+    t.integer "product_id"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.boolean "avaliable"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "name"
+    t.float "product_price"
+    t.float "rental_price"
+    t.string "sku"
+    t.integer "stock_quanity"
+    t.datetime "updated_at", null: false
   end
 end
