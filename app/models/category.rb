@@ -1,11 +1,12 @@
 class Category < ApplicationRecord
    has_many :products
-   validaes :name, presence: true, uniqueness: true
+   validates :name, presence: true, uniqueness: true
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "description", "id", "name", "updated_at"]
   end
- def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(auth_object = nil)
     []
   end
+  
 
 end
