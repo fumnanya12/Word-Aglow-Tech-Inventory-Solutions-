@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "home/index"
+  get "pages/show"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -13,4 +15,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "home#index"
+  get "/about", to: "pages#about"
+  get "/contact", to: "pages#contact"
+
+  # Generic CMS pages
+  get "/pages/:slug", to: "pages#show", as: :page
 end
