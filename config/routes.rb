@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "products/index"
+  get "products/show"
   get "home/index"
   get "pages/show"
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -18,7 +20,8 @@ Rails.application.routes.draw do
   root "home#index"
   get "/about", to: "pages#about"
   get "/contact", to: "pages#contact"
-
+  get "/products", to: "products#index"
+  resources :products
   # Generic CMS pages
   get "/pages/:slug", to: "pages#show", as: :page
 end

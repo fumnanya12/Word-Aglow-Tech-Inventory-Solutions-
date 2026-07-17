@@ -1,0 +1,17 @@
+<h1>Products#index</h1>
+<%= link_to "Home", root_path %>
+
+<div id="products">
+  <%@products.each do |p| %>
+  <h2>Category: <%=p.category.name%></h2>
+  <div>
+    <p>Name: <%=p.name%></p>
+    <p>Price: $<%=p.product_price%></p>
+    <p>Rental: $<%=p.rental_price%></p>
+  </div>
+  <a href="/products/<%=p.id%>">Link</a>
+
+  <%end%>
+
+
+</div>

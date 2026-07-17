@@ -1,0 +1,14 @@
+<h1>Products#show</h1>
+<%= link_to "Home", root_path %>
+
+<div id="products">
+  <h2>Category: <%=@products.category.name%></h2>
+  <div>
+    <p>Name: <%=@products.name%></p>
+    <p>Price: $<%=@products.product_price%></p>
+    <p>Rental: $<%=@products.rental_price%></p>
+  </div>
+
+
+
+</div>
