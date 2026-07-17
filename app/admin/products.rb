@@ -15,6 +15,10 @@ ActiveAdmin.register Product do
   #   permitted
   # end
   
+  filter :name
+  filter :category
+  filter :price
+  filter :created_at
    form do |f|
     f.inputs "Product Details" do
       f.input :name
