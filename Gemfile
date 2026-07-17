@@ -65,11 +65,14 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'activeadmin'
+gem "activeadmin"
 
 # Plus integrations with:
-gem 'devise'
-gem 'cancancan'
-gem 'draper'
-gem 'pundit'
+gem "devise"
+gem "cancancan"
+gem "draper"
+gem "pundit"
 gem "dartsass-rails"
+
+
+gem "nokogiri"
