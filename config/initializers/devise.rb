@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '88e3ed32402a5e63deaaa9337d016c9217c0f3c1ee82fd6ef390c4e7df6b4d54947151461ac1d10dc9c0a0450a6d3d2b7fa7a0efa91b3ac297d8342b734985da'
+  # config.secret_key = '749078794bdbfb8d0205d4ea0aedd56210763b0ffed5d8b1944bc45a6e8123a9727256a0b9b86d4328688b41cbd1e5fe8e9c5021517a4baaf0ae9818a40f2bcb'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -36,7 +36,7 @@ Devise.setup do |config|
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
-  require 'devise/orm/active_record'
+  require "devise/orm/active_record"
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -58,12 +58,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [:email]
+  config.case_insensitive_keys = [ :email ]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [:email]
+  config.strip_whitespace_keys = [ :email ]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -97,7 +97,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [ :http_auth ]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '8a7a798ca82cae474a0635c44832d2fbdb17fd88c46762e5a1b82eb8f60adbaf2d23d581235fd6bb74bec1cdd6604dbbb1ece2a4ea3ecf910d788ba227deab40'
+  # config.pepper = 'bed61fb14b03be953197888dd3bba345b382124b93d3ce7f3fc50214ba873adcb4d89069695f365992e9632b56c63b85e117b6729c036c94bc9a78e64769f38d'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -229,25 +229,25 @@ Devise.setup do |config|
   # change their passwords.
   config.reset_password_within = 6.hours
 
-  # When set to false, does not sign a user in automatically after their password is
-  # reset. Defaults to true, so a user is signed in automatically after a reset.
-  # config.sign_in_after_reset_password = true
+   # When set to false, does not sign a user in automatically after their password is
+   # reset. Defaults to true, so a user is signed in automatically after a reset.
+   # config.sign_in_after_reset_password = true
 
-  # ==> Configuration for :encryptable
-  # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
-  # You can use :sha1, :sha512 or algorithms from others authentication tools as
-  # :clearance_sha1, :authlogic_sha512 (then you should set stretches above to 20
-  # for default behavior) and :restful_authentication_sha1 (then you should set
-  # stretches to 10, and copy REST_AUTH_SITE_KEY to pepper).
-  #
-  # Require the `devise-encryptable` gem when using anything other than bcrypt
-  # config.encryptor = :sha512
+   # ==> Configuration for :encryptable
+   # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
+   # You can use :sha1, :sha512 or algorithms from others authentication tools as
+   # :clearance_sha1, :authlogic_sha512 (then you should set stretches above to 20
+   # for default behavior) and :restful_authentication_sha1 (then you should set
+   # stretches to 10, and copy REST_AUTH_SITE_KEY to pepper).
+   #
+   # Require the `devise-encryptable` gem when using anything other than bcrypt
+   # config.encryptor = :sha512
 
-  # ==> Scopes configuration
-  # Turn scoped views on. Before rendering "sessions/new", it will first check for
-  # "users/sessions/new". It's turned off by default because it's slower if you
-  # are using only default views.
-  # config.scoped_views = false
+   # ==> Scopes configuration
+   # Turn scoped views on. Before rendering "sessions/new", it will first check for
+   # "users/sessions/new". It's turned off by default because it's slower if you
+   # are using only default views.
+   config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
