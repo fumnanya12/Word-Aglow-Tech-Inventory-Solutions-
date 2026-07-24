@@ -76,3 +76,4 @@ gem "dartsass-rails"
 
 
 gem "nokogiri"
+gem "kaminari"

@@ -1,20 +1,87 @@
-<h1>Home#index</h1>
-<nav>
-  <p>logo/name</p> 
-  <%= link_to "products",products_path %>
-  <%= link_to "About",about_path %>
-   <%= link_to "contact",contact_path %>
-   <p>checkout</p>
+
+<nav class="rental-navbar"> 
+  <div class="logo"> 
+    <h3> <%= link_to root_path, class: "logo-link" do %>
+    Word <br>
+    Aglow 
+      <% end %> 
+    </h3> 
+  </div>
+  <div class="menu"> 
+    <ul class="rental-menu"> 
+      <li class="category-navigation"> 
+        <a href="#" class="category-button"> Categories <span>&#9662;</span> </a> 
+        <ul class="category-menu"> 
+          <% @categories.each do |category| %> 
+          <li> <%= link_to category.name,  products_path(category_id: category.id) %> 
+          </li> 
+          <% end %> 
+        </ul> 
+      </li> 
+          <li><%= link_to "Products", products_path %></li> 
+          <li><%= link_to "About", about_path %></li> 
+          <li><a href="#">Test</a></li> 
+          <li> <a href="#">Test</a></li> 
+    </ul> 
+  </div> 
+
+      <div class="actions"> 
+      <ul class="user"> 
+        <li><a href="#">Cart</a></li> 
+        <li><a href="#">User</a></li> 
+      </ul> 
+    </div> 
 </nav>
-<hr>
-<div>
-
-  <p>Search box</p>
-</div>
-
-<div class="product display">
-  <p>filter</p>
-  <table></table>
 
 
-</div>
+<div id="search-container"> 
+  <%= form_with url: products_path, method: :get, local: true, class: "product-search-form" do |form| %>
+  <%= form.label :search, "Product Search" %> 
+  <%= form.text_field :search, value: params[:search], placeholder: "Search product title or description" %> 
+  <%= form.collection_select :category_id, @categories, :id, :name, { include_blank: "All Categories", selected: params[:category_id] }, { id: "category" } %>
+  <%= form.button type: "submit" do %> 
+  <i class="fa fa-search"></i> <span class="visually-hidden">Search</span>
+   <% end %> 
+   <% end %>
+  </div>
+  <section> 
+    <h2 class="products-title">Products</h2> 
+    <% if @products.any? %>
+    <div class="product-container">
+       <% @products.each do |product| %>
+        <article class="items">
+         <%= link_to product_path(product) do %>
+            <% product_image = product.product_images.first %>
+
+            <% if product_image&.image&.attached? %>
+            <%= image_tag product_image.image,
+                        alt: product_image.alt_text.presence || product.name,
+                        width: 100,
+                        height: 200 %>
+            <% else %>
+            <%= image_tag "placeholder.png",
+                        alt: "No image available for #{product.name}",
+                        width: 100,
+                        height: 200 %>
+            <% end %>
+            <% end %>
+              <h5>
+                <strong>Name:</strong>
+                <%= product.name %>
+                </h5>
+                 <h6>
+                   <strong>Price:</strong>
+                    <%= number_to_currency(product.product_price) %>
+                  </h6>
+                 <%= link_to "View Product", product_path(product),class: "product-link" %>
+                  </article>
+                   <% end %>
+                    </div>
+                     <div class="pagination-container">    
+                       <%= paginate @products %>   
+                       </div> 
+                       <% else %>   
+                       <p class="no-products">     
+                        No products matched your search.   
+                        </p> <% end %> 
+  </section>
