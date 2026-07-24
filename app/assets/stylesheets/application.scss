@@ -173,9 +173,33 @@ display: flex;
   width: 550px;
 
 }
+
+.product-filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-link {
+  padding: 10px 18px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #333;
+  text-align: center;
+}
+
+.filter-link:hover,
+.filter-link.active {
+  background-color: #333;
+  color: white;
+}
 .product-container{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+  grid-template-columns: repeat(4, 1fr);
   background-color: rgb(234, 238, 241);
   gap: 7px;
   padding: 10px;
@@ -185,6 +209,7 @@ display: flex;
 .items{
   background-color: #f1f1f1;
   border: 1px solid black;
+  border-radius: 25px;
   padding: 10px;
   font-size: 30px;
   text-align: center;

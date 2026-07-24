@@ -1,17 +1,176 @@
-<h1>Products#index</h1>
-<%= link_to "Home", root_path %>
 
-<div id="products">
-  <%@products.each do |p| %>
-  <h2>Category: <%=p.category.name%></h2>
-  <div>
-    <p>Name: <%=p.name%></p>
-    <p>Price: $<%=p.product_price%></p>
-    <p>Rental: $<%=p.rental_price%></p>
+<nav class="rental-navbar"> 
+  <div class="logo"> 
+    <h3> <%= link_to root_path, class: "logo-link" do %>
+    Word <br>
+    Aglow 
+      <% end %> 
+    </h3> 
   </div>
-  <a href="/products/<%=p.id%>">Link</a>
+  <div class="menu"> 
+    <ul class="rental-menu"> 
+      <li class="category-navigation"> 
+        <a href="#" class="category-button"> Categories <span>&#9662;</span> </a> 
+        <ul class="category-menu"> 
+          <% @categories.each do |category| %> 
+          <li> <%= link_to category.name,  products_path(category_id: category.id) %> 
+          </li> 
+          <% end %> 
+        </ul> 
+      </li> 
+          <li><%= link_to "Products", products_path %></li> 
+          <li><%= link_to "About", about_path %></li> 
+          <li><a href="#">Test</a></li> 
+          <li> <a href="#">Test</a></li> 
+    </ul> 
+  </div> 
 
-  <%end%>
+      <div class="actions"> 
+      <ul class="user"> 
+        <li><a href="#"><i class="fa fa-shopping-basket"></i>Cart</a></li> 
+        <li><a href="#"><i class="fa fa-user"></i> My Account</a></li> 
+      </ul> 
+    </div> 
+</nav>
 
 
-</div>
+<div id="search-container"> 
+  <%= form_with url: products_path, method: :get, local: true, class: "product-search-form" do |form| %>
+  <%= form.label :search, "Product Search" %> 
+  <%= form.text_field :search, value: params[:search], placeholder: "Search product title or description" %> 
+  <%= form.collection_select :category_id, @categories, :id, :name, { include_blank: "All Categories", selected: params[:category_id] }, { id: "category" } %>
+  <%= form.button type: "submit" do %> 
+  <i class="fa fa-search"></i> <span class="visually-hidden">Search</span>
+   <% end %> 
+   <% end %>
+  </div>
+
+<div class="product-filters">
+  <h3>Filter:</h3>
+
+  <%= link_to "All Products",
+              products_path,
+              class: "filter-link #{'active' if params[:filter].blank?}" %>
+
+  <%= link_to "Available Products",
+              products_path(filter: "available"),
+              class: "filter-link #{'active' if params[:filter] == 'available'}" %>
+
+  <%= link_to "New Products",
+              products_path(filter: "new"),
+              class: "filter-link #{'active' if params[:filter] == 'new'}" %>
+
+  <%= link_to "Recently Updated",
+              products_path(filter: "recently_updated"),
+              class: "filter-link #{'active' if params[:filter] == 'recently_updated'}" %>
+ </div>            
+
+<section> 
+   
+    <% if @products_search.any? %>
+    <% if @selected_category %>
+        <h2 class="products-title">
+          Category: <%= @selected_category.name %>
+        </h2>
+      <% else %>
+        <h2 class="products-title">
+          All Products
+        </h2>
+      <% end %>
+
+
+    <div class="product-container">
+       <% @products_search.each do |product| %>
+        <article class="items">
+         <%= link_to product_path(product) do %>
+            <% product_image = product.product_images.first %>
+
+            <% if product_image&.image&.attached? %>
+            <%= image_tag product_image.image,
+                        alt: product_image.alt_text.presence || product.name,
+                        width: 210,
+                        height: 250 %>
+            <% else %>
+            <%= image_tag "placeholder.png",
+                        alt: "No image available for #{product.name}",
+                        width: 100,
+                        height: 200 %>
+            <% end %>
+            <% end %>
+              <h5>
+                <strong>Name:</strong>
+                <%= product.name %>
+                </h5>
+                 <h6>
+                   <strong>Price:</strong>
+                    <%= number_to_currency(product.product_price) %>
+                  </h6>
+                 <%= link_to "View Product", product_path(product),class: "product-link" %>
+                  </article>
+                   <% end %>
+                    </div>
+                     <div class="pagination-container">    
+                       <%= paginate @products_search %>   
+                       </div> 
+                       <% else %>   
+                       <p class="no-products">     
+                        No products matched your search.   
+                        </p> <% end %> 
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
