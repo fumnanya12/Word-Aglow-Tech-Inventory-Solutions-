@@ -1,0 +1,159 @@
+
+<nav class="rental-navbar"> 
+  <div class="logo"> 
+    <h3> <%= link_to root_path, class: "logo-link" do %>
+    Word <br>
+    Aglow 
+      <% end %> 
+    </h3> 
+  </div>
+  <div class="menu"> 
+    <ul class="rental-menu"> 
+      <li class="category-navigation"> 
+        <a href="#" class="category-button"> Categories <span>&#9662;</span> </a> 
+        <ul class="category-menu"> 
+          <% @categories.each do |category| %> 
+          <li> <%= link_to category.name,  products_path(category_id: category.id) %> 
+          </li> 
+          <% end %> 
+        </ul> 
+      </li> 
+          <li><%= link_to "Products", products_path %></li> 
+          <li><%= link_to "About", about_path %></li> 
+          <li><a href="#">Test</a></li> 
+          <li> <a href="#">Test</a></li> 
+    </ul> 
+  </div> 
+
+      <div class="actions"> 
+      <ul class="user"> 
+        <li><a href="#"><i class="fa fa-shopping-basket"></i>Cart</a></li> 
+        <%# <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>  %>
+        <% if customer_signed_in? %>
+          <li>
+             <%= link_to  customer_profile_path  do%>
+            <i class="fa fa-user-circle"></i>
+              <%=current_customer.username%>
+                 <% end %>
+          </li>
+
+          <li>
+            <%= button_to "Log Out",
+                          destroy_customer_session_path,
+                          method: :delete,
+                          class: "logout-button" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to new_customer_session_path do %>
+              <i class="fa fa-sign-in"></i>
+              Log In
+            <% end %>
+          </li>
+
+          <li>
+            <%= link_to new_customer_registration_path do %>
+              <i class="fa fa-user-plus"></i>
+              Sign Up
+            <% end %>
+          </li>
+        <% end %>
+      </ul> 
+    </div> 
+</nav>
+
+<div class="customer-profile-form">
+  <h1>Edit Personal Details</h1>
+
+  <%= form_with model: @customer,
+                url: customer_profile_path,
+                method: :patch do |f| %>
+
+    <% if @customer.errors.any? %>
+      <div class="form-errors">
+        <h2>
+          <%= pluralize(@customer.errors.count, "error") %>
+          prevented your details from being updated:
+        </h2>
+
+        <ul>
+          <% @customer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="edit-field">
+      <%= f.label :username %>
+      <%= f.text_field :username, autocomplete: "username" %>
+    </div>
+
+    <div class="edit-field">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, autocomplete: "given-name" %>
+    </div>
+
+    <div class="edit-field">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, autocomplete: "family-name" %>
+    </div>
+
+    <div class="edit-field">
+      <%= f.label :address_line_one %>
+      <%= f.text_field :address_line_one,
+                       autocomplete: "address-line1" %>
+    </div>
+
+    <div class="edit-field">
+      <%= f.label :address_line_two %>
+      <%= f.text_field :address_line_two,
+                       autocomplete: "address-line2" %>
+    </div>
+
+    <div class="edit-field">
+      <%= f.label :city %>
+      <%= f.text_field :city, autocomplete: "address-level2" %>
+    </div>
+
+    <div class="edit-field">
+      <%= f.label :province %>
+
+      <%= f.select :province,
+        [
+          "Alberta",
+          "British Columbia",
+          "Manitoba",
+          "New Brunswick",
+          "Newfoundland and Labrador",
+          "Northwest Territories",
+          "Nova Scotia",
+          "Nunavut",
+          "Ontario",
+          "Prince Edward Island",
+          "Quebec",
+          "Saskatchewan",
+          "Yukon"
+        ],
+        { prompt: "Select a province or territory" },
+        { autocomplete: "address-level1" } %>
+    </div>
+
+    <div class="edit-field">
+      <%= f.label :postal_code %>
+      <%= f.text_field :postal_code,
+                       autocomplete: "postal-code" %>
+    </div>
+
+    <div class="edit-actions">
+      <%= f.submit "Save Details" %>
+
+      <%= link_to "Cancel",
+                  customer_profile_path,
+                  class: "cancel-button" %>
+    </div>
+
+  <% end %>
+      <%= link_to "Back", customer_profile_path  %>
+
+</div>

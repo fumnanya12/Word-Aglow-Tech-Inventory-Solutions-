@@ -1,9 +1,11 @@
+<div class="account-edit-page">
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "customers/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="edit-field">
     <p><%= f.label :email %></p>
     <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
   </div>
@@ -12,7 +14,7 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
+  <div class="edit-field">
     <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i></p>
     <p><%= f.password_field :password, autocomplete: "new-password" %></p>
     <% if @minimum_password_length %>
@@ -20,17 +22,17 @@
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="edit-field">
     <p><%= f.label :password_confirmation %></p>
     <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
   </div>
 
-  <div class="field">
+  <div class="edit-field">
     <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i></p>
     <p><%= f.password_field :current_password, autocomplete: "current-password" %></p>
   </div>
 
-  <div class="actions">
+  <div class="edit-actions">
     <%= f.submit "Update" %>
   </div>
 <% end %>
@@ -39,4 +41,5 @@
 
 <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
-<%= link_to "Back", :back %>
+<%= link_to "Back", customer_profile_path  %>
+</div>
