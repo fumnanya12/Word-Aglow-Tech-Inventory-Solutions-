@@ -31,7 +31,8 @@
         <%# <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>  %>
         <% if customer_signed_in? %>
           <li>
-             <%= link_to  edit_customer_registration_path  do%>
+            <%= link_to  customer_profile_path  do%>
+
             <i class="fa fa-user-circle"></i>
               <%=current_customer.username%>
                  <% end %>
@@ -129,7 +130,7 @@
                     </div>
                      <div class="pagination-container">    
                        <%= paginate @products %>   
-                       </div> 
+                      </div> 
                        <% else %>   
                        <p class="no-products">     
                         No products matched your search.   

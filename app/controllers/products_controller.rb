@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
   end
 
 
-    @products = @products.page(params[:page]).per(9)
+    @products = @products.page(params[:page]).per(12)
     @products_search=@products
   end
 

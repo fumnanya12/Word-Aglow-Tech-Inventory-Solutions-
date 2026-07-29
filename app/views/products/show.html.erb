@@ -1,14 +1,131 @@
-<h1>Products#show</h1>
-<%= link_to "Home", root_path %>
 
-<div id="products">
-  <h2>Category: <%=@products.category.name%></h2>
-  <div>
-    <p>Name: <%=@products.name%></p>
-    <p>Price: $<%=@products.product_price%></p>
-    <p>Rental: $<%=@products.rental_price%></p>
+<nav class="rental-navbar"> 
+  <div class="logo"> 
+    <h3> <%= link_to root_path, class: "logo-link" do %>
+    Word <br>
+    Aglow 
+      <% end %> 
+    </h3> 
   </div>
+  <div class="menu"> 
+    <ul class="rental-menu"> 
+      <li class="category-navigation"> 
+        <a href="#" class="category-button"> Categories <span>&#9662;</span> </a> 
+        <ul class="category-menu"> 
+          <% @categories.each do |category| %> 
+          <li> <%= link_to category.name,  products_path(category_id: category.id) %> 
+          </li> 
+          <% end %> 
+        </ul> 
+      </li> 
+          <li><%= link_to "Products", products_path %></li> 
+          <li><%= link_to "About", about_path %></li> 
+          <li><a href="#">Test</a></li> 
+          <li> <a href="#">Test</a></li> 
+    </ul> 
+  </div> 
+
+      <div class="actions"> 
+      <ul class="user"> 
+      <li><a href="#"><i class="fa fa-shopping-basket"></i>Cart</a></li> 
+        <%# <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>  %>
+        <% if customer_signed_in? %>
+          <li>
+             <%= link_to  edit_customer_profile_path  do%>
+            <i class="fa fa-user-circle"></i>
+              <%=current_customer.username%>
+                 <% end %>
+          </li>
+
+          <li>
+            <%= button_to "Log Out",
+                          destroy_customer_session_path,
+                          method: :delete,
+                          class: "logout-button" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to new_customer_session_path do %>
+              <i class="fa fa-sign-in"></i>
+              Log In
+            <% end %>
+          </li>
+
+          <li>
+            <%= link_to new_customer_registration_path do %>
+              <i class="fa fa-user-plus"></i>
+              Sign Up
+            <% end %>
+          </li>
+        <% end %>
+      </ul> 
+    </div> 
+</nav>
 
 
+
+<div class="product-show">
+  <div class="product-image">
+    <% product_image = @product.product_images.first %>
+
+      <% if product_image&.image&.attached? %>
+      <%= image_tag product_image.image,
+                  alt: product_image.alt_text.presence || @product.name,
+                  width: 210,
+                  height: 250 %>
+      <% else %>
+      <%= image_tag "placeholder.png",
+                  alt: "No image available for #{@product.name}",
+                  width: 100,
+                  height: 200 %>
+      <% end %>
+  </div>
+  <div class="product-info">
+    <span class="product-category"><%= @product.category.name %></span>
+    <h1><%= @product.name %></h1>
+     <p><strong>Model:</strong> <%= @product.sku %></p>
+
+    <div class="product-pricing">
+      <p><strong>Purchase Price:</strong> $<%= @product.product_price %></p>
+      <p><strong>Rental Price:</strong> $<%= @product.rental_price %></p>
+    </div>
+
+      <% if @product.avaliable && @product.stock_quanity.to_i > 0 %>
+      <%= form_with url: cart_items_path,
+                    method: :post,
+                    class: "add-to-cart-form" do |form| %>
+
+        <%= form.hidden_field :product_id, value: @product.id %>
+
+        <div class="quantity-field">
+          <%= form.label :quantity, "Quantity" %>
+
+          <%= form.number_field :quantity,
+                value: 1,
+                min: 1,
+                max: @product.stock_quanity,
+                required: true %>
+        </div>
+
+        <%= form.submit "Add to Cart",
+              class: "add-to-cart-button" %>
+      <% end %>
+
+      <p class="stock-message">
+        <%= @product.stock_quanity %> available
+      </p>
+    <% else %>
+      <p class="out-of-stock">Currently unavailable</p>
+    <% end %>
+
+
+
+
+    <div class="product-description">
+        <h3>Description</h3>
+        <p><%= @product.description %></p>
+      </div>
+
+  </div>
 
 </div>
