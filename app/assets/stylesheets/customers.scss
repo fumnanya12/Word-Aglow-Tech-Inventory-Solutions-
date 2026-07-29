@@ -1,0 +1,385 @@
+.account-edit-page {
+ 
+
+    h2,
+    h3 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 35px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .edit-field {
+        margin-bottom: 20px;
+    }
+
+    .edit-field p {
+        margin: 0;
+    }
+
+    .edit-field label {
+        display: block;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 8px;
+    }
+
+    .edit-field i,
+    .edit-field em {
+        color: #777;
+        font-size: 0.9rem;
+    }
+
+    .edit-field input {
+        width: 100%;
+        padding: 12px 15px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        transition: 0.3s;
+        box-sizing: border-box;
+    }
+
+    .edit-field input:focus {
+        outline: none;
+        border-color: #0077cc;
+        box-shadow: 0 0 6px rgba(0,119,204,0.3);
+    }
+
+    .edit-actions {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .edit-actions input[type="submit"] {
+        background: #0077cc;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .edit-actions input[type="submit"]:hover {
+        background: #005fa3;
+    }
+
+    /* Cancel Account Section */
+
+    h3 {
+        margin-top: 50px;
+    }
+
+    h3 + div {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    button,
+    input[type="submit"] {
+        font-family: inherit;
+    }
+
+    form + h3 + div button {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    form + h3 + div button:hover {
+        background: #b02a37;
+    }
+
+    /* Back Link */
+
+    a {
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+        color: #0077cc;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Pending Confirmation Message */
+
+    form > div:not(.edit-field):not(.edit-actions) {
+        background: #fff8e1;
+        color: #8a6d3b;
+        border: 1px solid #ffe082;
+        padding: 12px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+}
+
+
+
+.customer-profile,
+.customer-profile-form,
+.account-password-page {
+  width: min(90%, 700px);
+  margin: 40px auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+}
+
+.customer-details {
+  display: grid;
+  gap: 14px;
+}
+
+.customer-detail {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 15px;
+  padding: 14px;
+  border-bottom: 1px solid #dddddd;
+
+  strong {
+    color: #333333;
+  }
+
+  span {
+    color: #555555;
+    overflow-wrap: anywhere;
+  }
+}
+
+.customer-profile-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.profile-button,
+.cancel-button {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.profile-button {
+  background: #0077cc;
+  color: #ffffff;
+
+  &:hover {
+    background: #005fa3;
+  }
+}
+
+.password-button {
+  background: #444444;
+
+  &:hover {
+    background: #222222;
+  }
+}
+
+.customer-profile-form,
+.account-password-page {
+  .edit-field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #0077cc;
+      box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.15);
+    }
+
+    small {
+      display: block;
+      margin-top: 6px;
+      color: #666666;
+    }
+  }
+
+  .edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+
+    input[type="submit"] {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      background: #0077cc;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+
+  .cancel-button {
+    background: #eeeeee;
+    color: #333333;
+  }
+   a {
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+        color: #0077cc;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+}
+
+@media (max-width: 600px) {
+  .customer-detail {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .customer-profile-actions,
+  .edit-actions {
+    flex-direction: column;
+  }
+
+  .profile-button,
+  .cancel-button,
+  .edit-actions input[type="submit"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+
+
+
+
+
+
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  span {
+    display: inline-flex;
+  }
+
+  a,
+  .current {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #333333;
+    text-decoration: none;
+    font-weight: 600;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  a:hover {
+    background: #0077cc;
+    color: #ffffff;
+    border-color: #0077cc;
+  }
+
+  .current {
+    background: #0077cc;
+    color: #ffffff;
+    border-color: #0077cc;
+  }
+
+  .disabled {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .gap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 35px;
+    color: #666666;
+  }
+}
+
+@media (max-width: 600px) {
+  .pagination {
+    gap: 4px;
+
+    a,
+    .current {
+      min-width: 34px;
+      height: 36px;
+      padding: 0 8px;
+      font-size: 14px;
+    }
+  }
+}

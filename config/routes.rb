@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "customer_profiles/show"
+  get "customer_profiles/edit"
   devise_for :customers
   get "products/index"
   get "products/show"
@@ -25,4 +27,9 @@ Rails.application.routes.draw do
   resources :products
   # Generic CMS pages
   get "/pages/:slug", to: "pages#show", as: :page
+
+
+  resource :customer_profile,
+          only: [ :show, :edit, :update ],
+          controller: "customer_profiles"
 end

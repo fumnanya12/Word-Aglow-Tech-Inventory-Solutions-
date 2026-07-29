@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       :address_line_one,
       :address_line_two,
       :city,
-      :province,
+      :province_id,
       :postal_code,
       :country
     ]
