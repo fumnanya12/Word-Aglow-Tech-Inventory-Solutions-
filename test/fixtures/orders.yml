@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer: one
+  status: MyString
+  subtotal: 9.99
+  tax: 9.99
+  total: 9.99
+  shipping_address: MyText
+  placed_at: 2026-07-28 20:44:03
+
+two:
+  customer: two
+  status: MyString
+  subtotal: 9.99
+  tax: 9.99
+  total: 9.99
+  shipping_address: MyText
+  placed_at: 2026-07-28 20:44:03
