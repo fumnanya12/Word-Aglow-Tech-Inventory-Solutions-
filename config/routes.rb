@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "checkouts/show"
+  get "orders/index"
+  get "orders/show"
+  get "carts/show"
   get "customer_profiles/show"
   get "customer_profiles/edit"
   devise_for :customers
@@ -32,4 +36,11 @@ Rails.application.routes.draw do
   resource :customer_profile,
           only: [ :show, :edit, :update ],
           controller: "customer_profiles"
+
+  resource :cart, only: [ :show ]
+
+resources :cart_items, only: [ :create, :update, :destroy ]
+resource :checkout, only: [ :show, :create ]
+resources :orders, only: [ :index, :show ]
+resources :order_items
 end
