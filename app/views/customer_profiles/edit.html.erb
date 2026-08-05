@@ -27,11 +27,18 @@
 
       <div class="actions"> 
       <ul class="user"> 
-        <li><a href="#"><i class="fa fa-shopping-basket"></i>Cart</a></li> 
+        <%= link_to cart_path, class: "cart-navigation-link" do %>
+        <i class="fa fa-shopping-basket"></i>Cart
+          <span class="cart-count">
+            <%= current_cart.total_quantity %>
+          </span>
+        <% end %>
+
         <%# <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>  %>
         <% if customer_signed_in? %>
           <li>
-             <%= link_to  customer_profile_path  do%>
+            <%= link_to  customer_profile_path  do%>
+
             <i class="fa fa-user-circle"></i>
               <%=current_customer.username%>
                  <% end %>
@@ -61,6 +68,7 @@
       </ul> 
     </div> 
 </nav>
+
 
 <div class="customer-profile-form">
   <h1>Edit Personal Details</h1>
@@ -117,24 +125,10 @@
     </div>
 
     <div class="edit-field">
-      <%= f.label :province %>
+    <%= f.label :province_id, "Province" %>
 
-      <%= f.select :province,
-        [
-          "Alberta",
-          "British Columbia",
-          "Manitoba",
-          "New Brunswick",
-          "Newfoundland and Labrador",
-          "Northwest Territories",
-          "Nova Scotia",
-          "Nunavut",
-          "Ontario",
-          "Prince Edward Island",
-          "Quebec",
-          "Saskatchewan",
-          "Yukon"
-        ],
+    <%= f.select :province_id,
+        Province.order(:name).pluck(:name, :id),
         { prompt: "Select a province or territory" },
         { autocomplete: "address-level1" } %>
     </div>
@@ -154,6 +148,6 @@
     </div>
 
   <% end %>
-      <%= link_to "Back", customer_profile_path  %>
+      <%= link_to "Back", :back  %>
 
 </div>

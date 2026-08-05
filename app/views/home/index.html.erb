@@ -27,7 +27,13 @@
 
       <div class="actions"> 
       <ul class="user"> 
-        <li><a href="#"><i class="fa fa-shopping-basket"></i>Cart</a></li> 
+        <%= link_to cart_path, class: "cart-navigation-link" do %>
+        <i class="fa fa-shopping-basket"></i>Cart
+          <span class="cart-count">
+            <%= current_cart.total_quantity %>
+          </span>
+        <% end %>
+
         <%# <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>  %>
         <% if customer_signed_in? %>
           <li>

@@ -27,11 +27,18 @@
 
       <div class="actions"> 
       <ul class="user"> 
-      <li><a href="#"><i class="fa fa-shopping-basket"></i>Cart</a></li> 
+        <%= link_to cart_path, class: "cart-navigation-link" do %>
+        <i class="fa fa-shopping-basket"></i>Cart
+          <span class="cart-count">
+            <%= current_cart.total_quantity %>
+          </span>
+        <% end %>
+
         <%# <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>  %>
         <% if customer_signed_in? %>
           <li>
-             <%= link_to  edit_customer_profile_path  do%>
+            <%= link_to  customer_profile_path  do%>
+
             <i class="fa fa-user-circle"></i>
               <%=current_customer.username%>
                  <% end %>
@@ -63,6 +70,7 @@
 </nav>
 
 
+<%= link_to "Back", :back, class: "back-link" %>
 
 <div class="product-show">
   <div class="product-image">
@@ -84,7 +92,6 @@
     <span class="product-category"><%= @product.category.name %></span>
     <h1><%= @product.name %></h1>
      <p><strong>Model:</strong> <%= @product.sku %></p>
-
     <div class="product-pricing">
       <p><strong>Purchase Price:</strong> $<%= @product.product_price %></p>
       <p><strong>Rental Price:</strong> $<%= @product.rental_price %></p>

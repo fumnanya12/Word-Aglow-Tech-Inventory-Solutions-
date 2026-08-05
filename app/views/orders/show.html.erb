@@ -1,4 +1,5 @@
 
+
 <nav class="rental-navbar"> 
   <div class="logo"> 
     <h3> <%= link_to root_path, class: "logo-link" do %>
@@ -69,74 +70,90 @@
     </div> 
 </nav>
 
-<div class="customer-profile">
-  <h1>My Account</h1>
 
-  <div class="customer-details">
-    <div class="customer-detail">
-      <strong>Username:</strong>
-      <span><%= @customer.username %></span>
-    </div>
+<div class="order-page">
+  <h1>Order Confirmation</h1>
 
-    <div class="customer-detail">
-      <strong>Email:</strong>
-      <span><%= @customer.email %></span>
-    </div>
+  <div class="order-information">
+    <p>
+      <strong>Order number:</strong>
+      <%= @order.id %>
+    </p>
 
-    <div class="customer-detail">
-      <strong>First name:</strong>
-      <span><%= @customer.first_name %></span>
-    </div>
+    <p>
+      <strong>Status:</strong>
+      <%= @order.status.titleize %>
+    </p>
 
-    <div class="customer-detail">
-      <strong>Last name:</strong>
-      <span><%= @customer.last_name %></span>
-    </div>
+    <p>
+      <strong>Order date:</strong>
+      <%= @order.created_at.strftime("%B %d, %Y") %>
+    </p>
+  </div>
 
-    <div class="customer-detail">
-      <strong>Address line one:</strong>
-      <span><%= @customer.address_line_one %></span>
-    </div>
+  <div class="order-items">
+    <% @order.order_items.each do |order_item| %>
+      <article class="order-item">
+        <div>
+          <h2><%= order_item.product.name %></h2>
 
-    <% if @customer.address_line_two.present? %>
-      <div class="customer-detail">
-        <strong>Address line two:</strong>
-        <span><%= @customer.address_line_two %></span>
-      </div>
+          <p>
+            Quantity:
+            <%= order_item.quantity %>
+          </p>
+
+          <p>
+            Unit price:
+            <%= number_to_currency(order_item.unit_price) %>
+          </p>
+
+         
+        </div>
+      </article>
     <% end %>
-
-    <div class="customer-detail">
-      <strong>City:</strong>
-      <span><%= @customer.city %></span>
-    </div>
-
-    <div class="customer-detail">
-      <strong>Province:</strong>
-      <span><%= @customer.province %></span>
-    </div>
-
-    <div class="customer-detail">
-      <strong>Postal code:</strong>
-      <span><%= @customer.postal_code %></span>
-    </div>
-
-    
-    <div class="customer-detail">
-      <strong>Orders</strong>
-      <%= link_to "See past order",
-                orders_path,
-                class: "profile-button" %>
-
-    </div>
   </div>
 
-  <div class="customer-profile-actions">
-    <%= link_to "Edit Personal Details",
-                edit_customer_profile_path,
-                class: "profile-button" %>
+<div class="order-summary">
+  <p>
+    Subtotal:
+    <%= number_to_currency(@order.subtotal) %>
+  </p>
+  <%province=@order.customer.province%>
 
-    <%= link_to "Change Password",
-                edit_customer_registration_path,
-                class: "profile-button password-button" %>
-  </div>
+<% gst = @order.subtotal.to_d * (province.gst_rate.to_d ) %>
+<% pst = @order.subtotal.to_d * (province.pst_rate.to_d ) %>
+<% hst = @order.subtotal.to_d * (province.hst_rate.to_d ) %>
+
+  <% if province.gst_rate.to_d.positive? %>
+    <p>
+      GST:
+      <%= number_to_currency(gst) %>
+    </p>
+  <% end %>
+
+  <% if province.pst_rate.to_d.positive? %>
+    <p>
+      PST:
+      <%= number_to_currency(pst) %>
+    </p>
+  <% end %>
+
+  <% if province.hst_rate.to_d.positive? %>
+    <p>
+      HST:
+      <%= number_to_currency(hst) %>
+    </p>
+  <% end %>
+
+  <p>
+    <strong>
+      Total:
+      <%= number_to_currency(@order.total) %>
+    </strong>
+  </p>
+</div>
+
+  <%= link_to "Back to orders",
+        orders_path,
+        class: "continue-shopping-button" %>
 </div>

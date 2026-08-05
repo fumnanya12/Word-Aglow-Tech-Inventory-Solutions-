@@ -12,4 +12,8 @@ class OrderItem < ApplicationRecord
               only_integer: true,
               greater_than: 0
             }
+
+  def subtotal
+    quantity * unit_price
+  end          
 end

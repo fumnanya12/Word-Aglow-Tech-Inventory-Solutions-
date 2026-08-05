@@ -6,4 +6,7 @@ class CartItem < ApplicationRecord
               only_integer: true,
               greater_than: 0
             }
+  def subtotal
+    quantity * product.product_price
+  end
 end

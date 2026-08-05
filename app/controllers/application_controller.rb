@@ -33,4 +33,40 @@ class ApplicationController < ActionController::Base
       keys: customer_fields
     )
   end
+
+
+helper_method :current_cart, :current_cart_count
+
+  private
+
+  def current_cart
+    if customer_signed_in?
+      signed_in_customer_cart
+    else
+      guest_cart
+    end
+  end
+
+def signed_in_customer_cart
+  current_customer.cart || current_customer.create_cart!
+end
+
+def guest_cart
+  cart = Cart.find_by(id: session[:cart_id])
+
+  return cart if cart.present?
+
+  cart = Cart.create!
+  session[:cart_id] = cart.id
+  cart
+end
+
+  # def current_cart_count
+  #   if customer_signed_in?
+  #     cart = current_customer.carts.find_by(status: "active")
+  #   elsif session[:cart_id]
+  #     cart = Cart.find_by(id: session[:cart_id], customer_id: nil, status: "active")
+  #   end
+  #   cart&.cart_items&.sum(:quantity) || 0
+  # end
 end

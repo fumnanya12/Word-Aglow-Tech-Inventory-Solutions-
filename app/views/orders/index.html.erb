@@ -1,4 +1,5 @@
 
+
 <nav class="rental-navbar"> 
   <div class="logo"> 
     <h3> <%= link_to root_path, class: "logo-link" do %>
@@ -69,74 +70,34 @@
     </div> 
 </nav>
 
-<div class="customer-profile">
-  <h1>My Account</h1>
 
-  <div class="customer-details">
-    <div class="customer-detail">
-      <strong>Username:</strong>
-      <span><%= @customer.username %></span>
-    </div>
+<div class="orders-page">
+  <h1>My Orders</h1>
 
-    <div class="customer-detail">
-      <strong>Email:</strong>
-      <span><%= @customer.email %></span>
-    </div>
+  <% if @orders.any? %>
+    <% @orders.each do |order| %>
+      <article class="order-card">
+        <h2>Order #<%= order.id %></h2>
 
-    <div class="customer-detail">
-      <strong>First name:</strong>
-      <span><%= @customer.first_name %></span>
-    </div>
+        <p>
+          Date:
+          <%= order.created_at.strftime("%B %d, %Y") %>
+        </p>
 
-    <div class="customer-detail">
-      <strong>Last name:</strong>
-      <span><%= @customer.last_name %></span>
-    </div>
+        <p>
+          Status:
+          <%= order.status.titleize %>
+        </p>
 
-    <div class="customer-detail">
-      <strong>Address line one:</strong>
-      <span><%= @customer.address_line_one %></span>
-    </div>
+        <p>
+          Total:
+          <%= number_to_currency(order.total_price) %>
+        </p>
 
-    <% if @customer.address_line_two.present? %>
-      <div class="customer-detail">
-        <strong>Address line two:</strong>
-        <span><%= @customer.address_line_two %></span>
-      </div>
+        <%= link_to "View Order", order_path(order) %>
+      </article>
     <% end %>
-
-    <div class="customer-detail">
-      <strong>City:</strong>
-      <span><%= @customer.city %></span>
-    </div>
-
-    <div class="customer-detail">
-      <strong>Province:</strong>
-      <span><%= @customer.province %></span>
-    </div>
-
-    <div class="customer-detail">
-      <strong>Postal code:</strong>
-      <span><%= @customer.postal_code %></span>
-    </div>
-
-    
-    <div class="customer-detail">
-      <strong>Orders</strong>
-      <%= link_to "See past order",
-                orders_path,
-                class: "profile-button" %>
-
-    </div>
-  </div>
-
-  <div class="customer-profile-actions">
-    <%= link_to "Edit Personal Details",
-                edit_customer_profile_path,
-                class: "profile-button" %>
-
-    <%= link_to "Change Password",
-                edit_customer_registration_path,
-                class: "profile-button password-button" %>
-  </div>
+  <% else %>
+    <p>You have not placed any orders yet.</p>
+  <% end %>
 </div>

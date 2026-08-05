@@ -27,4 +27,5 @@ class Customer < ApplicationRecord
   end
    belongs_to :province, optional: true
    has_many :orders, dependent: :restrict_with_error
+   has_one :cart, dependent: :destroy
 end
