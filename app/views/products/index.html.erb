@@ -48,7 +48,7 @@
     <div class="product-container">
        <% @products_search.each do |product| %>
         <article class="items">
-         <%= link_to product_path(product) do %>
+         <%= link_to product_path(product, page: @products.current_page) do %>
             <% product_image = product.product_images.first %>
 
             <% if product_image&.image&.attached? %>

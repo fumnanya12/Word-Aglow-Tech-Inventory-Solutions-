@@ -50,14 +50,14 @@
                         height: 200 %>
             <% end %>
             <% end %>
-              <h5>
+              <h3>
                 <strong>Name:</strong>
                 <%= product.name %>
-                </h5>
-                 <h6>
+                </h3>
+                 <h4>
                    <strong>Price:</strong>
                     <%= number_to_currency(product.product_price) %>
-                  </h6>
+                  </h4>
                  <%= link_to "View Product", product_path(product),class: "product-link" %>
                   </article>
                    <% end %>

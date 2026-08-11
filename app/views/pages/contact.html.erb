@@ -1,8 +1,11 @@
 <div class="container page-content">
   <h1><%= @page.title %></h1>
   <hr>
-  <%= link_to "Home", root_path %>
-  <div class="content">
+<%= render "shared/breadcrumbs",
+    breadcrumbs: [
+      { name: "Contact" }
+    ]
+%>    <div class="content">
     <!-- Use simple_format to preserve line breaks, or raw/html_safe if you store HTML -->
     <%= simple_format(@page.content) %>
   </div>

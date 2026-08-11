@@ -1,5 +1,10 @@
 
-
+<%= render "shared/breadcrumbs",
+    breadcrumbs: [
+      { name: "Cart", path: cart_path },
+      { name: "Checkout" }
+    ]
+%>
 <div class="checkout-page">
   <h1>Checkout</h1>
 

@@ -19,21 +19,21 @@
         </ul> 
       </li> 
           <li><%= link_to "Products", products_path %></li> 
-          <li><%= link_to "About", about_path %></li> 
-          <li><a href="#">Test</a></li> 
-          <li> <a href="#">Test</a></li> 
+          <li><%= link_to "About", about_path %></li>
+          <li><%= link_to "Contact", contact_path %></li> 
     </ul> 
   </div> 
 
       <div class="actions"> 
       <ul class="user"> 
+        <li>
         <%= link_to cart_path, class: "cart-navigation-link" do %>
         <i class="fa fa-shopping-basket"></i>Cart
           <span class="cart-count">
             <%= current_cart.total_quantity %>
           </span>
         <% end %>
-
+        </li> 
         <%# <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>  %>
         <% if customer_signed_in? %>
           <li>

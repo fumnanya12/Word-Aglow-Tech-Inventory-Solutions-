@@ -1,6 +1,10 @@
 
 
-<%= link_to "← Back", request.referer || root_path, class: "back-link" %>
+<%= render "shared/breadcrumbs",
+    breadcrumbs: [
+      { name: "Cart" }
+    ]
+%>
 <div class="cart-page">
   <h1>Your Cart</h1>
 

@@ -1,5 +1,11 @@
 
 
+<%= render "shared/breadcrumbs",
+    breadcrumbs: [
+      { name: current_customer.username, path: customer_profile_path },
+      { name: "Orders" }
+    ]
+%>
 
 <div class="orders-page">
   <h1>My Orders</h1>

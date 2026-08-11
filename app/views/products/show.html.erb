@@ -1,6 +1,12 @@
 
 
-<%= link_to "Back", :back, class: "back-link" %>
+<%= render "shared/breadcrumbs",
+    breadcrumbs: [
+      { name: params[:page].present? ? "Products - Page #{params[:page]}" : "Products",
+        path: products_path(page: params[:page]) },
+      { name: @product.name }
+    ]
+%>
 
 <div class="product-show">
   <div class="product-image">
@@ -59,7 +65,7 @@
 
 
     <div class="product-description">
-        <h3>Description</h3>
+        <h2>Description</h2>
         <p><%= @product.description %></p>
       </div>
 

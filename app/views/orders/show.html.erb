@@ -1,5 +1,12 @@
 
 
+<%= render "shared/breadcrumbs",
+    breadcrumbs: [
+      { name: "Orders", path: orders_path },
+      { name: @order.id }
+    ]
+%>
+
 <div class="order-page">
   <h1>Order Confirmation</h1>
 
@@ -47,27 +54,37 @@
     Subtotal:
     <%= number_to_currency(@order.subtotal) %>
   </p>
-  <%province=@order.customer.province%>
+<%
+  province = @order.customer.province
 
-<% gst = @order.subtotal.to_d * (province.gst_rate.to_d ) %>
-<% pst = @order.subtotal.to_d * (province.pst_rate.to_d ) %>
-<% hst = @order.subtotal.to_d * (province.hst_rate.to_d ) %>
+  gst = @order.gst_amount.nil? ?
+        (@order.subtotal.to_d * province.gst_rate.to_d).round(2) :
+        @order.gst_amount
 
-  <% if province.gst_rate.to_d.positive? %>
+  pst = @order.pst_amount.nil? ?
+        (@order.subtotal.to_d * province.pst_rate.to_d).round(2) :
+        @order.pst_amount
+
+  hst = @order.hst_amount.nil? ?
+        (@order.subtotal.to_d * province.hst_rate.to_d).round(2) :
+        @order.hst_amount
+%>
+
+  <% if  gst.to_d.positive? %>
     <p>
       GST:
       <%= number_to_currency(gst) %>
     </p>
   <% end %>
 
-  <% if province.pst_rate.to_d.positive? %>
+  <% if pst.to_d.positive? %>
     <p>
       PST:
       <%= number_to_currency(pst) %>
     </p>
   <% end %>
 
-  <% if province.hst_rate.to_d.positive? %>
+  <% if hst.to_d.positive? %>
     <p>
       HST:
       <%= number_to_currency(hst) %>
