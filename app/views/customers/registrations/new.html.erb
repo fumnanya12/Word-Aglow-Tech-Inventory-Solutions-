@@ -1,3 +1,7 @@
+<%= link_to "← Back", request.referer || root_path, class: "back-link" %>
+<div class="login-page">
+<div class="login-container">
+
 <h1>Create Customer Account</h1>
 
 
@@ -6,17 +10,17 @@
               url: registration_path(resource_name) do |form| %>
   <%= render "customers/shared/error_messages", resource: resource %>
    <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username, autofocus: true, autocomplete: "username" %>
+   <p> <%= form.label :username %></p>
+    <p> <%= form.text_field :username, autofocus: true, autocomplete: "username" %></p>
   </div>
   <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+   <p> <%= form.label :first_name %></p>
+    <p><%= form.text_field :first_name %></p>
   </div>
 
   <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
+     <p> <%= form.label :last_name %></p>
+    <p>  <%= form.text_field :last_name %></p>
   </div>
 
 
@@ -43,4 +47,9 @@
   </div>
 <% end %>
 
-<%= render "customers/shared/links" %>
+
+    <div class="devise-links">
+      <%= render "customers/shared/links" %>
+    </div>
+</div>
+</div>

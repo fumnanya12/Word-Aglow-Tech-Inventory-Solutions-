@@ -1,3 +1,6 @@
+<%= link_to "← Back", request.referer || root_path, class: "back-link" %>
+<div class="login-page">
+  <div class="login-container">
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -23,4 +26,9 @@
   </div>
 <% end %>
 
-<%= render "customers/shared/links" %>
+
+    <div class="devise-links">
+      <%= render "customers/shared/links" %>
+    </div>
+</div>
+</div>
