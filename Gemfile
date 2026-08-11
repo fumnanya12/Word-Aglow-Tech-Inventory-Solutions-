@@ -77,3 +77,7 @@ gem "dartsass-rails"
 
 gem "nokogiri"
 gem "kaminari"
+
+
+gem "rubocop"
+gem "rubocop-rails"
