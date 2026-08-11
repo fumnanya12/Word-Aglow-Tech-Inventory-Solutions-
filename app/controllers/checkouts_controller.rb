@@ -27,7 +27,7 @@ class CheckoutsController < ApplicationController
                   alert: "Please add your province before checkout."
       return
     end
-
+    province = current_customer.province
     unavailable_item = @cart.cart_items.includes(:product).find do |item|
       item.quantity > item.product.stock_quanity
     end
@@ -47,6 +47,15 @@ class CheckoutsController < ApplicationController
         placed_at: Time.current,
         shipping_address: formatted_shipping_address,
         subtotal: @subtotal,
+
+
+        gst_rate: province.gst_rate,
+        pst_rate: province.pst_rate,
+        hst_rate: province.hst_rate,
+
+        gst_amount: @gst_amount,
+        pst_amount: @pst_amount,
+        hst_amount: @hst_amount,
         tax: @tax,
         total: @total
       )

@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   def show
     @categories = Category.order(:name)
        @order = current_customer.orders
-                             .includes(order_items: :product)
+                             .includes(:order_items)
                              .find(params[:id])
   end
 
@@ -35,22 +35,51 @@ class OrdersController < ApplicationController
     subtotal = cart.total_price.to_d
 
 
-    gst = subtotal * (province.gst_rate.to_d / 100)
-    pst = subtotal * (province.pst_rate.to_d / 100)
-    hst = subtotal * (province.hst_rate.to_d / 100)
+    gst = subtotal * province.gst_rate.to_d
+    pst = subtotal * province.pst_rate.to_d
+    hst = subtotal * province.hst_rate.to_d
     total_tax = gst + pst + hst
 
     total = (subtotal + total_tax).round(2)
     order = nil
+
+    puts "===== CHECKOUT TAX DEBUG ====="
+puts "Province: #{province.inspect}"
+puts "GST RATE: #{province.gst_rate.inspect}"
+puts "PST RATE: #{province.pst_rate.inspect}"
+puts "HST RATE: #{province.hst_rate.inspect}"
+puts "GST AMOUNT: #{gst.inspect}"
+puts "PST AMOUNT: #{pst.inspect}"
+puts "HST AMOUNT: #{hst.inspect}"
+puts "=============================="
 
     ActiveRecord::Base.transaction do
       order = current_customer.orders.create!(
         status: "placed",
         shipping_address: formatted_shipping_address,
         subtotal: subtotal,
+
+        gst_rate: province.gst_rate,
+        pst_rate: province.pst_rate,
+        hst_rate: province.hst_rate,
+
+        gst_amount: gst.round(2),
+        pst_amount: pst.round(2),
+        hst_amount: hst.round(2),
         tax: total_tax,
         total: total
+
       )
+      puts order.attributes.slice(
+          "gst_rate",
+          "pst_rate",
+          "hst_rate",
+          "gst_amount",
+          "pst_amount",
+          "hst_amount"
+        )
+
+        order.save!
 
       cart.cart_items.includes(:product).each do |cart_item|
         product = cart_item.product

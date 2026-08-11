@@ -13,16 +13,19 @@ ActiveAdmin.register Customer do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  ActiveAdmin.register Customer do
+   config.batch_actions = false
+
   permit_params :username,
-                :email,
-                :first_name,
-                :last_name,
-                :address_line_one,
-                :address_line_two,
-                :city,
-                :province_id,
-                :postal_code
+              :email,
+              :password,
+              :password_confirmation,
+              :first_name,
+              :last_name,
+              :address_line_one,
+              :address_line_two,
+              :city,
+              :province_id,
+              :postal_code
 
   index do
     selectable_column
@@ -38,7 +41,23 @@ ActiveAdmin.register Customer do
       end
     column :created_at
 
-    actions
+    actions defaults: false do |customer|
+      item "View", admin_customer_path(customer)
+      item "Edit", edit_admin_customer_path(customer)
+
+      span do
+        button_to "Delete",
+                  admin_customer_path(customer),
+                  method: :delete,
+                  form: {
+                    data: {
+                      turbo: false
+                    },
+                    onsubmit: "return confirm('Are you sure you want to delete this customer?');"
+
+                  }
+      end
+    end
   end
 
   filter :username
@@ -68,20 +87,26 @@ ActiveAdmin.register Customer do
     end
   end
 
-  form do |f|
-    f.inputs "Customer Details" do
-      f.input :username
-      f.input :email
-      f.input :first_name
-      f.input :last_name
-      f.input :address_line_one
-      f.input :address_line_two
-      f.input :city
-      f.input :province
-      f.input :postal_code
+form do |f|
+  f.inputs "Customer Details" do
+    f.input :username
+    f.input :email
+
+    if f.object.new_record?
+      f.input :password
+      f.input :password_confirmation
     end
 
-    f.actions
+    f.input :first_name
+    f.input :last_name
+    f.input :address_line_one
+    f.input :address_line_two
+    f.input :city
+    f.input :province
+    f.input :postal_code
   end
+
+  f.actions
 end
+
 end
