@@ -34,11 +34,15 @@ class ApplicationController < ActionController::Base
     )
   end
 
+  layout "application"
 
-helper_method :current_cart, :current_cart_count
+
+helper_method :current_cart, :current_cart_count, :nav_categories
 
   private
-
+  def nav_categories
+    @nav_categories ||= Category.order(:name)
+  end
   def current_cart
     if customer_signed_in?
       signed_in_customer_cart
@@ -55,9 +59,10 @@ def guest_cart
   cart = Cart.find_by(id: session[:cart_id])
 
   return cart if cart.present?
-
-  cart = Cart.create!
-  session[:cart_id] = cart.id
+    unless cart
+      cart = Cart.create!
+      session[:cart_id] = cart.id
+    end
   cart
 end
 
