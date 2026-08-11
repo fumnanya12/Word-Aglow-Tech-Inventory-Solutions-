@@ -15,5 +15,14 @@ class OrderItem < ApplicationRecord
 
   def subtotal
     quantity * unit_price
-  end          
+  end
+  def self.ransackable_attributes(auth_object = nil)
+  [ "created_at", "id", "id_value", "line_total", "order_id", "product_id", "product_name", "quantity", "unit_price", "updated_at" ]
+  end
+  def self.ransackable_associations(_auth_object = nil)
+    %w[
+      order
+      product
+    ]
+  end
 end
