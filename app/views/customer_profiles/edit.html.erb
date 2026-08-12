@@ -1,75 +1,8 @@
-
-<nav class="rental-navbar"> 
-  <div class="logo"> 
-    <h3> <%= link_to root_path, class: "logo-link" do %>
-    Word <br>
-    Aglow 
-      <% end %> 
-    </h3> 
-  </div>
-  <div class="menu"> 
-    <ul class="rental-menu"> 
-      <li class="category-navigation"> 
-        <a href="#" class="category-button"> Categories <span>&#9662;</span> </a> 
-        <ul class="category-menu"> 
-          <% @categories.each do |category| %> 
-          <li> <%= link_to category.name,  products_path(category_id: category.id) %> 
-          </li> 
-          <% end %> 
-        </ul> 
-      </li> 
-          <li><%= link_to "Products", products_path %></li> 
-          <li><%= link_to "About", about_path %></li> 
-          <li><a href="#">Test</a></li> 
-          <li> <a href="#">Test</a></li> 
-    </ul> 
-  </div> 
-
-      <div class="actions"> 
-      <ul class="user"> 
-        <%= link_to cart_path, class: "cart-navigation-link" do %>
-        <i class="fa fa-shopping-basket"></i>Cart
-          <span class="cart-count">
-            <%= current_cart.total_quantity %>
-          </span>
-        <% end %>
-
-        <%# <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>  %>
-        <% if customer_signed_in? %>
-          <li>
-            <%= link_to  customer_profile_path  do%>
-
-            <i class="fa fa-user-circle"></i>
-              <%=current_customer.username%>
-                 <% end %>
-          </li>
-
-          <li>
-            <%= button_to "Log Out",
-                          destroy_customer_session_path,
-                          method: :delete,
-                          class: "logout-button" %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to new_customer_session_path do %>
-              <i class="fa fa-sign-in"></i>
-              Log In
-            <% end %>
-          </li>
-
-          <li>
-            <%= link_to new_customer_registration_path do %>
-              <i class="fa fa-user-plus"></i>
-              Sign Up
-            <% end %>
-          </li>
-        <% end %>
-      </ul> 
-    </div> 
-</nav>
-
-
+<%= render "shared/breadcrumbs",
+    breadcrumbs: [
+      { name: current_customer.username }
+    ]
+%>
 <div class="customer-profile-form">
   <h1>Edit Personal Details</h1>
 

@@ -44,9 +44,8 @@
               <%= form.label :quantity, "Quantity" %>
 
               <%= form.number_field :quantity,
-                    value: cart_item.quantity,
-                    min: 1,
-                    max: product.stock_quanity %>
+                    value: cart_item.quantity
+                    %>
 
               <%= form.submit "Update" %>
             <% end %>
